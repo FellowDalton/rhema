@@ -1,0 +1,22 @@
+[
+  {
+    "session_id": "7ee10dea-3895-4de7-b942-540c8b19b951",
+    "transcript_path": "/Users/dalton/.claude/projects/-Users-dalton-projects-rhema/7ee10dea-3895-4de7-b942-540c8b19b951.jsonl",
+    "cwd": "/Users/dalton/projects/rhema",
+    "permission_mode": "default",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "agent_id": "67c2fc37",
+    "agent_transcript_path": "/Users/dalton/.claude/projects/-Users-dalton-projects-rhema/agent-67c2fc37.jsonl"
+  },
+  {
+    "session_id": "7ee10dea-3895-4de7-b942-540c8b19b951",
+    "transcript_path": "/Users/dalton/.claude/projects/-Users-dalton-projects-rhema/7ee10dea-3895-4de7-b942-540c8b19b951.jsonl",
+    "cwd": "/Users/dalton/projects/rhema",
+    "permission_mode": "default",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "agent_id": "a26f7c7c",
+    "agent_transcript_path": "/Users/dalton/.claude/projects/-Users-dalton-projects-rhema/agent-a26f7c7c.jsonl"
+  }
+]

@@ -1,0 +1,9 @@
+[
+  {
+    "session_id": "7ee10dea-3895-4de7-b942-540c8b19b951",
+    "transcript_path": "/Users/dalton/.claude/projects/-Users-dalton-projects-rhema/7ee10dea-3895-4de7-b942-540c8b19b951.jsonl",
+    "cwd": "/Users/dalton/projects/rhema",
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  }
+]
