@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayer Page - Rhema App</title>
+    <style>
+        :root {
+            --primary-color: #f0e6d2;
+            --secondary-color: #e6d9c2;
+            --accent-color: #ffd700;
+            --text-color: #333;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --button-color: #4CAF50;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background: linear-gradient(to bottom, #e0d8c9, #fff3d4);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .prayer-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .prayer-description {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .impressions-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            height: 300px;
+        }
+
+        .impression-textarea {
+            position: relative;
+        }
+
+        .impression-textarea textarea {
+            width: 100%;
+            height: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            resize: none;
+        }
+
+        .impression-edit {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            cursor: pointer;
+        }
+
+        .impression-list {
+            overflow-y: auto;
+            border-radius: 0.5rem;
+        }
+
+        .impression-item {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+
+        .impression-item:nth-child(even) {
+            background-color: var(--secondary-color);
+        }
+
+        .impression-item.selected {
+            background-color: var(--accent-color);
+        }
+
+        .impression-user {
+            font-weight: bold;
+        }
+
+        .impression-date {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .comment-card {
+            margin-left: 2rem;
+            border-left: 2px solid var(--secondary-color);
+            padding-left: 1rem;
+        }
+
+        .button {
+            background-color: var(--button-color);
+            color: white;
+            border: none;
+            border-radius: 0.25rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .button:hover {
+            opacity: 0.9;
+        }
+
+        .button-secondary {
+            background-color: #3498db;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="prayer-title">This is the prayer title</h1>
+        <p class="prayer-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+        <h2 class="section-title">Impressions</h2>
+        <div class="impressions-container">
+            <div class="impression-textarea card">
+                <textarea disabled></textarea>
+                <span class="impression-edit">✎</span>
+            </div>
+            <div class="impression-list card">
+                <div class="impression-item selected" onclick="showImpression(this)">
+                    <p class="impression-user">Nikolas Dalton</p>
+                    <p class="impression-date">3/7/2023</p>
+                    <p class="impression-content" style="display: none;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nulla posuere sollicitudin aliquam ultrices sagittis orci a. Lectus nulla at volutpat diam ut.</p>
+                </div>
+                <div class="impression-item" onclick="showImpression(this)">
+                    <p class="impression-user">Thomas Horton</p>
+                    <p class="impression-date">3/8/2023</p>
+                    <p class="impression-content" style="display: none;">Tincidunt lobortis feugiat vivamus at augue eget arcu. Mattis enim ut tellus elementum sagittis vitae et leo duis.</p>
+                </div>
+                <div class="impression-item" onclick="showImpression(this)">
+                    <p class="impression-user">Emma Johnson</p>
+                    <p class="impression-date">3/9/2023</p>
+                    <p class="impression-content" style="display: none;">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                </div>
+                <div class="impression-item" onclick="showImpression(this)">
+                    <p class="impression-user">Michael Smith</p>
+                    <p class="impression-date">3/10/2023</p>
+                    <p class="impression-content" style="display: none;">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                </div>
+                <div class="impression-item" onclick="showImpression(this)">
+                    <p class="impression-user">Sophia Lee</p>
+                    <p class="impression-date">3/11/2023</p>
+                    <p class="impression-content" style="display: none;">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+                </div>
+                <div class="impression-item" onclick="showImpression(this)">
+                    <p class="impression-user">Daniel Brown</p>
+                    <p class="impression-date">3/12/2023</p>
+                    <p class="impression-content" style="display: none;">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</p>
+                </div>
+                <div class="impression-item" onclick="showImpression(this)">
+                    <p class="impression-user">Olivia Wilson</p>
+                    <p class="impression-date">3/13/2023</p>
+                    <p class="impression-content" style="display: none;">Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Comments</h2>
+        <div class="card">
+            <p class="impression-user">Nikolas Dalton</p>
+            <p>Tincidunt lobortis feugiat vivamus at augue eget arcu. Mattis enim ut tellus elementum sagittis vitae et leo duis.</p>
+            <p class="impression-date">3/7/2023</p>
+            <button class="button">Reply</button>
+
+            <div class="comment-card">
+                <p class="impression-user">Thomas Horton</p>
+                <p>Tincidunt lobortis feugiat vivamus at augue eget arcu. Mattis enim ut tellus elementum sagittis vitae et leo duis.</p>
+                <p class="impression-date">3/7/2023</p>
+                <button class="button">Reply</button>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button class="button button-secondary">Add feedback</button>
+            <button class="button">Send prayer</button>
+        </div>
+
+        <h2 class="section-title">Feedback</h2>
+        <div class="card">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nulla posuere sollicitudin aliquam ultrices sagittis orci a. Lectus nulla at volutpat diam ut. Sollicitudin ac orci phasellus egestas tellus. Venenatis lectus magna fringilla urna porttitor rhoncus. Consequat mauris nunc congue nisi vitae suscipit tellus mauris a. At lectus urna duis convallis convallis tellus.</p>
+        </div>
+    </div>
+
+    <script>
+        function showImpression(element) {
+            const content = element.querySelector('.impression-content').textContent;
+            document.querySelector('.impression-textarea textarea').value = content;
+            
+            // Remove 'selected' class from all items
+            document.querySelectorAll('.impression-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Add 'selected' class to clicked item
+            element.classList.add('selected');
+        }
+
+        // Select the first impression by default
+        document.querySelector('.impression-item').click();
+    </script>
+</body>
+</html>

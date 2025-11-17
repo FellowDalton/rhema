@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Updated Rhema App Color Scheme Preview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #F5F5F5;
+        }
+        .color-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            max-width: 800px;
+            padding: 1rem;
+        }
+        .color-square {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .color-name {
+            font-size: 0.9em;
+            margin-bottom: 0.3em;
+        }
+        .color-hex {
+            font-size: 0.8em;
+            opacity: 0.8;
+        }
+        .color1 { background-color: #000F08; }
+        .color2 { background-color: #136F63; }
+        .color3 { background-color: #E0CA3C; color: #000F08; }
+        .color4 { background-color: #F34213; }
+        .color5 { background-color: #3E2F5B; }
+        .color6 { background-color: #C1C1C1; color: #000F08; }
+        .color7 { background-color: #FFFBFC; color: #000F08; border: 1px solid #C1C1C1; }
+    </style>
+</head>
+<body>
+    <div class="color-container">
+        <div class="color-square color1">
+            <span class="color-name">Dark Green</span>
+            <span class="color-hex">#000F08</span>
+        </div>
+        <div class="color-square color2">
+            <span class="color-name">Teal</span>
+            <span class="color-hex">#136F63</span>
+        </div>
+        <div class="color-square color3">
+            <span class="color-name">Yellow</span>
+            <span class="color-hex">#E0CA3C</span>
+        </div>
+        <div class="color-square color4">
+            <span class="color-name">Orange-Red</span>
+            <span class="color-hex">#F34213</span>
+        </div>
+        <div class="color-square color5">
+            <span class="color-name">Purple</span>
+            <span class="color-hex">#3E2F5B</span>
+        </div>
+        <div class="color-square color6">
+            <span class="color-name">Gray</span>
+            <span class="color-hex">#C1C1C1</span>
+        </div>
+        <div class="color-square color7">
+            <span class="color-name">Off-White</span>
+            <span class="color-hex">#FFFBFC</span>
+        </div>
+    </div>
+</body>
+</html>

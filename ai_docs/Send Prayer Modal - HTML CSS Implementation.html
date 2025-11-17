@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Prayer Modal</title>
+    <style>
+        :root {
+            --primary-color: #f0e6d2;
+            --secondary-color: #e6d9c2;
+            --text-color: #333;
+            --button-color: #4CAF50;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .send-prayer-modal {
+            background-color: var(--primary-color);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            width: clamp(20rem, 90%, 40rem);
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+        }
+
+        .send-prayer-modal__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .send-prayer-modal__title {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .send-prayer-modal__close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .send-prayer-modal__form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .send-prayer-modal__label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .send-prayer-modal__textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+            font-size: 1rem;
+            box-sizing: border-box;
+            resize: vertical;
+            min-height: 20rem;
+            font-family: Arial, sans-serif;
+        }
+
+        .send-prayer-modal__links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .send-prayer-modal__link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .send-prayer-modal__link:hover {
+            text-decoration: underline;
+        }
+
+        .send-prayer-modal__actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .send-prayer-modal__btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .send-prayer-modal__btn--primary {
+            background-color: var(--button-color);
+            color: white;
+        }
+
+        .send-prayer-modal__btn--secondary {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        .send-prayer-modal__btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="send-prayer-modal">
+        <div class="send-prayer-modal__header">
+            <h2 class="send-prayer-modal__title">Send prayer</h2>
+            <button class="send-prayer-modal__close-btn">&times;</button>
+        </div>
+        <form id="sendPrayerForm" class="send-prayer-modal__form">
+            <div class="send-prayer-modal__form-group">
+                <label for="prayerContent" class="send-prayer-modal__label">Prayer Content</label>
+                <textarea id="prayerContent" class="send-prayer-modal__textarea" rows="15" readonly></textarea>
+            </div>
+            <div class="send-prayer-modal__links">
+                <a href="#" class="send-prayer-modal__link">Ask questions or file complaints</a>
+                <a href="#" class="send-prayer-modal__link">Data protection and terms of use</a>
+            </div>
+            <div class="send-prayer-modal__actions">
+                <button type="button" class="send-prayer-modal__btn send-prayer-modal__btn--secondary" id="saveDraftBtn">Save draft</button>
+                <button type="button" class="send-prayer-modal__btn send-prayer-modal__btn--primary" id="copyToClipboardBtn">Copy to clipboard</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const closeBtn = document.querySelector('.send-prayer-modal__close-btn');
+            const saveDraftBtn = document.getElementById('saveDraftBtn');
+            const copyToClipboardBtn = document.getElementById('copyToClipboardBtn');
+            const prayerContentTextarea = document.getElementById('prayerContent');
+
+            // Sample prayer content
+            const prayerContent = `Dear Someone,
+
+Here is a generic text about sending prayer like this, what we are trying to do, and what we are not expecting from you.
+
+Here is also a link to ask any questions or complaints regarding this practice.
+Link to data protection and terms of use.
+
+If multiple people participated in this:
+
+Person 1:
+
+List of visions or word Person 1 got.
+Nulla consequat massa quis enim. In ac felis quis tortor malesuada pretium.
+Fusce pharetra convallis urna.
+
+Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper
+libero, sit amet adipiscing sem neque sed ipsum. Nam at tortor in tellus
+interdum sagittis. Duis lobortis massa imperdiet quam.
+
+Person 2:
+
+List of visions or word Person 2 got.
+Nulla consequat massa quis enim. In ac felis quis tortor malesuada pretium.
+Fusce pharetra convallis urna.
+
+Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper
+libero, sit amet adipiscing sem neque sed ipsum. Nam at tortor in tellus
+interdum sagittis. Duis lobortis massa imperdiet quam.
+
+Much love the prophetic team at Odense Vineyard`;
+
+            // Set the prayer content in the textarea
+            prayerContentTextarea.value = prayerContent;
+
+            closeBtn.addEventListener('click', function() {
+                console.log('Modal closed');
+                // In a real implementation, you would hide the modal here
+            });
+
+            saveDraftBtn.addEventListener('click', function() {
+                console.log('Saving draft:', prayerContentTextarea.value);
+                // In a real implementation, you would save the draft data here
+            });
+
+            copyToClipboardBtn.addEventListener('click', function() {
+                prayerContentTextarea.select();
+                document.execCommand('copy');
+                console.log('Copied to clipboard');
+                // You might want to show a temporary message to the user indicating successful copy
+                this.textContent = 'Copied!';
+                setTimeout(() => {
+                    this.textContent = 'Copy to clipboard';
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>

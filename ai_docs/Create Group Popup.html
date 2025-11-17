@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Group</title>
+    <style>
+        :root {
+            --primary-color: #f0e6d2;
+            --secondary-color: #e6d9c2;
+            --accent-color: #ffd700;
+            --text-color: #333;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --button-color: #3498db;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .popup {
+            background-color: var(--primary-color);
+            border-radius: 8px;
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .popup-title {
+            font-size: 24px;
+            color: var(--text-color);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .tag {
+            background-color: var(--secondary-color);
+            padding: 5px 10px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .tag .remove {
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background-color: var(--button-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .submit-btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup">
+        <div class="popup-header">
+            <h2 class="popup-title">Create group</h2>
+            <button class="close-btn">&times;</button>
+        </div>
+        <form id="createGroupForm">
+            <div class="form-group">
+                <label for="groupName">Group name <span style="color: red;">*</span></label>
+                <input type="text" id="groupName" required>
+            </div>
+            <div class="form-group">
+                <label for="groupDescription">Description</label>
+                <textarea id="groupDescription"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="addMembers">Add members</label>
+                <input type="text" id="addMembers">
+                <div class="tags" id="memberTags">
+                    <span class="tag">John Doe <span class="remove">&times;</span></span>
+                    <span class="tag">Jane Smith <span class="remove">&times;</span></span>
+                </div>
+            </div>
+            <button type="submit" class="submit-btn">Create group</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('createGroupForm');
+            const closeBtn = document.querySelector('.close-btn');
+            const addMembersInput = document.getElementById('addMembers');
+            const memberTagsContainer = document.getElementById('memberTags');
+
+            function addTag(value) {
+                const tag = document.createElement('span');
+                tag.classList.add('tag');
+                tag.innerHTML = value + '<span class="remove">&times;</span>';
+                memberTagsContainer.appendChild(tag);
+
+                tag.querySelector('.remove').addEventListener('click', function() {
+                    memberTagsContainer.removeChild(tag);
+                });
+            }
+
+            addMembersInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (this.value.trim() !== '') {
+                        addTag(this.value.trim());
+                        this.value = '';
+                    }
+                }
+            });
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Here you would handle form submission
+                console.log('Group created!');
+            });
+
+            closeBtn.addEventListener('click', function() {
+                // Here you would close the popup
+                console.log('Popup closed');
+            });
+
+            // Remove existing tags (for demonstration purposes)
+            document.querySelectorAll('.tag .remove').forEach(removeBtn => {
+                removeBtn.addEventListener('click', function() {
+                    this.parentElement.remove();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Prayer</title>
+    <style>
+        :root {
+            --primary-color: #f0e6d2;
+            --secondary-color: #e6d9c2;
+            --accent-color: #ffd700;
+            --text-color: #333;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --button-color: #4CAF50;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .popup {
+            background-color: var(--primary-color);
+            border-radius: 8px;
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .popup-title {
+            font-size: 24px;
+            color: var(--text-color);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .time-frame {
+            display: flex;
+            gap: 10px;
+        }
+
+        .time-frame > div {
+            flex: 1;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .tag {
+            background-color: var(--secondary-color);
+            padding: 5px 10px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .tag .remove {
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background-color: var(--button-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .info-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-color: #888;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 16px;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup">
+        <div class="popup-header">
+            <h2 class="popup-title">Create prayer</h2>
+            <button class="close-btn">&times;</button>
+        </div>
+        <form id="createPrayerForm">
+            <div class="form-group">
+                <label for="title">Title <span style="color: red;">*</span></label>
+                <input type="text" id="title" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description"></textarea>
+            </div>
+            <div class="form-group">
+                <div class="time-frame">
+                    <div>
+                        <label for="endDate">End date</label>
+                        <input type="date" id="endDate">
+                    </div>
+                    <div>
+                        <label for="endTime">End time</label>
+                        <input type="time" id="endTime">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="addPeople">Add people</label>
+                <input type="text" id="addPeople">
+                <div class="tags" id="peopleTags">
+                    <span class="tag">Nikolas Dalton <span class="remove">&times;</span></span>
+                    <span class="tag">Thomas Lorentzen <span class="remove">&times;</span></span>
+                    <span class="tag">Marie Dalton <span class="remove">&times;</span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="addGroups">Add groups</label>
+                <input type="text" id="addGroups">
+                <div class="tags" id="groupTags">
+                    <span class="tag">Odense Vineyard <span class="remove">&times;</span></span>
+                    <span class="tag">Aarhus Vineyard <span class="remove">&times;</span></span>
+                    <span class="tag">Roskilde Vineyard <span class="remove">&times;</span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="prayerType">Prayer type <span class="info-icon">?</span></label>
+                <select id="prayerType">
+                    <option value="hidden">Hidden until end</option>
+                    <option value="visible">Visible</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="target"> Target <span class="info-icon">?</span>
+                </label>
+            </div>
+            <button type="submit" class="submit-btn">Create prayer</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('createPrayerForm');
+            const closeBtn = document.querySelector('.close-btn');
+
+            function addTag(input, container) {
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        const tag = document.createElement('span');
+                        tag.classList.add('tag');
+                        tag.innerHTML = this.value + '<span class="remove">&times;</span>';
+                        container.appendChild(tag);
+                        this.value = '';
+
+                        tag.querySelector('.remove').addEventListener('click', function() {
+                            container.removeChild(tag);
+                        });
+                    }
+                });
+            }
+
+            addTag(document.getElementById('addPeople'), document.getElementById('peopleTags'));
+            addTag(document.getElementById('addGroups'), document.getElementById('groupTags'));
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Here you would handle form submission
+                console.log('Prayer created!');
+            });
+
+            closeBtn.addEventListener('click', function() {
+                // Here you would close the popup
+                console.log('Popup closed');
+            });
+
+            // Remove existing tags (for demonstration purposes)
+            document.querySelectorAll('.tag .remove').forEach(removeBtn => {
+                removeBtn.addEventListener('click', function() {
+                    this.parentElement.remove();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

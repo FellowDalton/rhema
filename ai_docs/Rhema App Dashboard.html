@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rhema App Dashboard</title>
+    <style>
+        :root {
+            --primary-color: #f0e6d2;
+            --secondary-color: #e6d9c2;
+            --accent-color: #ffd700;
+            --text-color: #333;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --button-color: #4CAF50;
+            --group-button-color: #3498db;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background: linear-gradient(to bottom, #e0d8c9, #fff3d4);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            left: -50%;
+            right: -50%;
+            top: -50%;
+            bottom: -50%;
+            width: 200%;
+            height: 200%;
+            background-repeat: repeat;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        body::before {
+            background-image: 
+                radial-gradient(circle at 40% 40%, white 1%, transparent 1%),
+                radial-gradient(circle at 60% 60%, white 1%, transparent 1%);
+            background-size: 50px 50px;
+        }
+
+        body::after {
+            background-image: 
+                radial-gradient(circle at 40% 40%, black 1%, transparent 1%),
+                radial-gradient(circle at 60% 60%, black 1%, transparent 1%);
+            background-size: 75px 75px;
+            animation: grainAnimation 8s steps(10) infinite;
+        }
+
+        @keyframes grainAnimation {
+            0% { transform: translate(0, 0); }
+            10% { transform: translate(-5%, -5%); }
+            20% { transform: translate(-10%, 5%); }
+            30% { transform: translate(5%, -10%); }
+            40% { transform: translate(-5%, 15%); }
+            50% { transform: translate(-10%, 5%); }
+            60% { transform: translate(15%, 0); }
+            70% { transform: translate(0, 10%); }
+            80% { transform: translate(-15%, 0); }
+            90% { transform: translate(10%, 5%); }
+            100% { transform: translate(5%, 0); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .header-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo {
+            width: 60px;
+            height: auto;
+        }
+
+        .user-profile {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-title {
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .create-prayer-btn, .create-group-btn {
+            color: white;
+            border: none;
+            border-radius: 2rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .create-prayer-btn {
+            background-color: var(--button-color);
+        }
+
+        .create-prayer-btn:hover {
+            background-color: #45a049;
+        }
+
+        .create-group-btn {
+            background-color: var(--group-button-color);
+        }
+
+        .create-group-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .create-prayer-btn span, .create-group-btn span {
+            font-size: 1.2rem;
+            margin-left: 0.3rem;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: white;
+            border: 1px solid var(--text-color);
+            border-radius: 2rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--text-color);
+            color: white;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .card-footer span {
+            display: flex;
+            align-items: center;
+        }
+
+        .icon {
+            width: 1em;
+            height: 1em;
+            margin-right: 0.25em;
+            fill: currentColor;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-logo">Rhema</div>
+            <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 50">
+                <path d="M20 40 L32 10 L44 40 L56 10" fill="none" stroke="currentColor" stroke-width="2"/>
+                <line x1="32" y1="25" x2="32" y2="35" stroke="currentColor" stroke-width="2"/>
+                <circle cx="44" cy="25" r="2" fill="currentColor"/>
+            </svg>
+            <div class="user-profile">JD</div>
+        </header>
+
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">Prayer Dashboard</h1>
+            <div class="button-container">
+                <button id="openCreatePrayerModal" class="create-prayer-btn">Prayer <span>+</span></button>
+                <button class="create-group-btn">Group <span>+</span></button>
+            </div>
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">Open Prayers</button>
+            <button class="filter-btn">Closed Prayers</button>
+            <button class="filter-btn">My Groups</button>
+        </div>
+
+        <div class="card-grid" id="prayer-cards">
+            <!-- Prayer cards will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+        // Hardcoded data for demonstration
+        const prayers = [
+            {
+                title: "Morning Gratitude",
+                description: "Start each day with a prayer of thanksgiving for the blessings in your life. This practice helps cultivate a positive mindset and deepens your connection with God. Remember to express gratitude for both big and small things, and reflect on how these blessings impact your daily life.",
+                impressions: 7,
+                endTime: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000 + 3 * 60 * 60 * 1000 + 30 * 60 * 1000) // 2 days, 3 hours, 30 minutes from now
+            },
+            {
+                title: "Healing for Sarah",
+                description: "Pray for Sarah's complete recovery from her recent surgery. Ask for God's healing touch, comfort during her recovery, and wisdom for her medical team. Pray also for peace and strength for her family during this challenging time.",
+                impressions: 12,
+                endTime: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000) // 5 days from now
+            },
+            {
+                title: "Community Outreach",
+                description: "Seek guidance and blessings for our upcoming community outreach program. Pray for volunteers, resources, and open hearts in the community. Ask for God's love to be evident in our actions and for lives to be positively impacted through this initiative.",
+                impressions: 5,
+                endTime: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000) // 10 days from now
+            },
+            {
+                title: "Personal Growth",
+                description: "Focus on areas of personal spiritual growth. Pray for wisdom, discernment, and the strength to overcome personal challenges. Ask for guidance in developing a deeper understanding of God's word and how to apply it in daily life.",
+                impressions: 3,
+                endTime: new Date(Date.now() + 15 * 60 * 60 * 1000) // 15 hours from now
+            }
+        ];
+
+        function formatTimeRemaining(endTime) {
+            const now = new Date();
+            const difference = endTime - now;
+
+            if (difference <= 0) {
+                return "Ended";
+            }
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+
+            let result = "";
+            if (days > 0) result += `${days}d `;
+            if (hours > 0 || days > 0) result += `${hours}h `;
+            result += `${minutes}m`;
+
+            return result.trim();
+        }
+
+        function createPrayerCard(prayer) {
+            return `
+                <div class="card">
+                    <h2 class="card-title">${prayer.title}</h2>
+                    <p class="card-description">${prayer.description}</p>
+                    <div class="card-footer">
+                        <span>
+                            <svg class="icon" viewBox="0 0 100 100">
+                                <path d="M30 90 C 40 70, 50 60, 50 40 C 50 60, 60 70, 70 90" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <path d="M40 90 C 45 80, 50 70, 50 50 C 50 70, 55 80, 60 90" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="50" cy="20" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <path d="M45 20 L 55 20 M50 15 L50 25" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            ${prayer.impressions}
+                        </span>
+                        <span>
+                            <svg class="icon" viewBox="0 0 100 100">
+                                <path d="M30 15 L70 15 L50 50 L70 85 L30 85 L50 50 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <path d="M30 15 L70 15 M30 85 L70 85" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            ${formatTimeRemaining(prayer.endTime)}
+                        </span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updatePrayerCards() {
+            const cardGrid = document.getElementById('prayer-cards');
+            cardGrid.innerHTML = prayers.map(createPrayerCard).join('');
+        }
+
+        // Initial update
+        updatePrayerCards();
+
+        // Update every minute
+        setInterval(updatePrayerCards, 60000);
+
+        // Filter button functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                // Here you would implement the actual filtering logic
+            });
+        });
+
+        // Open Create Prayer Modal
+        document.getElementById('openCreatePrayerModal').addEventListener('click', function() {
+            // This will be implemented in the separate popup file
+            console.log('Open Create Prayer Modal');
+        });
+    </script>
+</body>
+</html>
