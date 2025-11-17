@@ -1,0 +1,237 @@
+<html class="">
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      window.FontAwesomeConfig = {
+        autoReplaceSvg: "nest", // Options: 'nest', 'remove', 'replace'
+      };
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <style>
+      * {
+        font-family: "League Spartan", sans-serif;
+      }
+
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+
+    <style>
+      .highlighted-section {
+        outline: 2px solid #3f20fb;
+        background-color: rgba(63, 32, 251, 0.1);
+      }
+
+      .edit-button {
+        position: absolute;
+        z-index: 1000;
+      }
+    </style>
+
+    <script>
+      tailwind.config = {};
+    </script>
+  </head>
+
+  <body class="h-full text-base-content">
+    <div
+      class="min-h-screen bg-gradient-to-b from-[#e0e0e0] via-[#e0e0e0] to-[#ffdf8d]"
+      id="dashboard"
+    >
+      <!-- Header -->
+      <header class="w-full bg-white border-b border-gray-200" id="header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between items-center h-16">
+            <div class="flex items-center">
+              <div class="text-[#fe5d26] mr-4">
+                <i class="fa-solid fa-pray text-2xl"></i>
+              </div>
+              <span class="text-xl text-[#0d0d0d]">Rhema</span>
+            </div>
+
+            <div class="flex items-center gap-6">
+              <button class="p-2 text-gray-600 hover:text-[#0d0d0d]">
+                <i class="fa-regular fa-bell text-xl"></i>
+              </button>
+              <div class="flex items-center gap-2">
+                <img
+                  src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg"
+                  class="w-8 h-8 rounded-full"
+                  alt="User avatar"
+                />
+                <span class="text-[#0d0d0d]">John Doe</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Quick Actions -->
+        <div class="flex justify-between items-center mb-8" id="quick-actions">
+          <h1 class="text-2xl text-[#0d0d0d]">Dashboard</h1>
+          <div class="flex gap-4">
+            <button
+              class="h-10 px-4 bg-[#fe5d26] text-white rounded-lg hover:bg-[#fe5d26]/90 flex items-center gap-2"
+            >
+              <i class="fa-solid fa-plus"></i>
+              <span>Create Prayer</span>
+            </button>
+            <button
+              class="h-10 px-4 bg-gray-50 text-[#0d0d0d] rounded-lg border border-gray-200 hover:bg-gray-100 flex items-center gap-2"
+            >
+              <i class="fa-solid fa-users"></i>
+              <span>Create Group</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="bg-white rounded-xl p-6 mb-8 shadow-sm" id="filters">
+          <div class="flex items-center gap-6 mb-6">
+            <div class="relative flex-1">
+              <i
+                class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              ></i>
+              <input
+                type="text"
+                placeholder="Search prayers..."
+                class="w-full h-[42px] pl-10 pr-4 bg-white rounded-lg border border-gray-200 focus:outline-none focus:border-[#fe5d26] focus:ring-1 focus:ring-[#fe5d26]"
+              />
+            </div>
+            <button
+              class="h-[42px] px-4 bg-gray-50 text-[#0d0d0d] rounded-lg border border-gray-200 hover:bg-gray-100 flex items-center gap-2"
+            >
+              <i class="fa-solid fa-filter"></i>
+              <span>Filters</span>
+            </button>
+          </div>
+
+          <div class="flex gap-4">
+            <button class="px-4 py-2 bg-[#fe5d26] text-white rounded-full">
+              All Prayers
+            </button>
+            <button
+              class="px-4 py-2 bg-gray-50 text-gray-600 rounded-full hover:bg-gray-100"
+            >
+              Active
+            </button>
+            <button
+              class="px-4 py-2 bg-gray-50 text-gray-600 rounded-full hover:bg-gray-100"
+            >
+              Reviewing
+            </button>
+            <button
+              class="px-4 py-2 bg-gray-50 text-gray-600 rounded-full hover:bg-gray-100"
+            >
+              Closed
+            </button>
+          </div>
+        </div>
+
+        <!-- Prayer Cards Grid -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          id="prayer-cards"
+        >
+          <!-- Active Prayer Card -->
+          <div
+            class="bg-white rounded-xl p-6 shadow-sm border-l-4 border-[#fe5d26]"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <h3 class="text-lg text-[#0d0d0d]">Healing for Sarah</h3>
+              <span
+                class="px-3 py-1 bg-[#fe5d26] text-white text-sm rounded-full"
+                >Active</span
+              >
+            </div>
+            <p class="text-gray-600 mb-4">
+              Praying for complete healing and recovery from surgery...
+            </p>
+            <div
+              class="flex items-center justify-between text-sm text-gray-500"
+            >
+              <div class="flex items-center gap-2">
+                <i class="fa-regular fa-clock"></i>
+                <span>Ends in 2 days</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fa-regular fa-comment"></i>
+                <span>12 impressions</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reviewing Prayer Card -->
+          <div
+            class="bg-white rounded-xl p-6 shadow-sm border-l-4 border-[#cfe1ca]"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <h3 class="text-lg text-[#0d0d0d]">Ministry Growth</h3>
+              <span
+                class="px-3 py-1 bg-[#cfe1ca] text-[#0d0d0d] text-sm rounded-full"
+                >Reviewing</span
+              >
+            </div>
+            <p class="text-gray-600 mb-4">
+              Seeking wisdom for expansion of youth ministry...
+            </p>
+            <div
+              class="flex items-center justify-between text-sm text-gray-500"
+            >
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-check"></i>
+                <span>Ended 2 days ago</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fa-regular fa-comment"></i>
+                <span>8 impressions</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Closed Prayer Card -->
+          <div
+            class="bg-white rounded-xl p-6 shadow-sm border-l-4 border-gray-200"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <h3 class="text-lg text-[#0d0d0d]">Community Outreach</h3>
+              <span
+                class="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full"
+                >Closed</span
+              >
+            </div>
+            <p class="text-gray-600 mb-4">
+              Planning for the upcoming community service event...
+            </p>
+            <div
+              class="flex items-center justify-between text-sm text-gray-500"
+            >
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-lock"></i>
+                <span>Closed</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fa-regular fa-comment"></i>
+                <span>15 impressions</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

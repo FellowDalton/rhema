@@ -1,0 +1,210 @@
+<html class="">
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      window.FontAwesomeConfig = {
+        autoReplaceSvg: "nest", // Options: 'nest', 'remove', 'replace'
+      };
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <style>
+      * {
+        font-family: "League Spartan", sans-serif;
+      }
+
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+
+    <style>
+      .highlighted-section {
+        outline: 2px solid #3f20fb;
+        background-color: rgba(63, 32, 251, 0.1);
+      }
+
+      .edit-button {
+        position: absolute;
+        z-index: 1000;
+      }
+    </style>
+
+    <script>
+      tailwind.config = {};
+    </script>
+  </head>
+
+  <body class="h-full text-base-content">
+    <div
+      class="min-h-screen bg-gradient-to-b from-[#e0e0e0] from-30% to-[#ffdf8d] to-100% flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+      id="create-prayer-modal"
+    >
+      <div
+        class="max-w-2xl w-full bg-white rounded-xl shadow-sm p-8"
+        id="modal-container"
+      >
+        <div class="flex justify-between items-center mb-8" id="modal-header">
+          <h2 class="text-2xl text-[#0d0d0d]">Create New Prayer</h2>
+          <button class="text-gray-500 hover:text-gray-700">
+            <i class="fa-solid fa-xmark text-xl"></i>
+          </button>
+        </div>
+
+        <form class="space-y-6" id="create-prayer-form">
+          <div class="space-y-6" id="prayer-settings">
+            <div id="title-input">
+              <label class="block text-sm text-[#0d0d0d] mb-2"
+                >Prayer Title</label
+              >
+              <input
+                type="text"
+                class="w-full h-[42px] px-3 bg-white rounded-lg border border-gray-200 focus:outline-none focus:border-[#fe5d26] focus:ring-1 focus:ring-[#fe5d26]"
+                placeholder="Enter prayer title"
+              />
+            </div>
+
+            <div id="description-input">
+              <label class="block text-sm text-[#0d0d0d] mb-2"
+                >Description</label
+              >
+              <textarea
+                class="w-full h-24 px-3 py-2 bg-white rounded-lg border border-gray-200 focus:outline-none focus:border-[#fe5d26] focus:ring-1 focus:ring-[#fe5d26]"
+                placeholder="Enter prayer description"
+              ></textarea>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6">
+              <div id="prayer-type">
+                <label class="block text-sm text-[#0d0d0d] mb-2"
+                  >Prayer Type</label
+                >
+                <div class="flex space-x-4">
+                  <label class="flex items-center">
+                    <input
+                      type="radio"
+                      name="prayer-type"
+                      class="h-4 w-4 text-[#fe5d26] focus:ring-[#fe5d26]"
+                    />
+                    <span class="ml-2 text-gray-600">Hidden</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="radio"
+                      name="prayer-type"
+                      class="h-4 w-4 text-[#fe5d26] focus:ring-[#fe5d26]"
+                    />
+                    <span class="ml-2 text-gray-600">Visible</span>
+                  </label>
+                </div>
+              </div>
+
+              <div id="prayer-access">
+                <label class="block text-sm text-[#0d0d0d] mb-2"
+                  >Prayer Access</label
+                >
+                <div class="flex space-x-4">
+                  <label class="flex items-center">
+                    <input
+                      type="radio"
+                      name="prayer-access"
+                      class="h-4 w-4 text-[#fe5d26] focus:ring-[#fe5d26]"
+                    />
+                    <span class="ml-2 text-gray-600">Public</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="radio"
+                      name="prayer-access"
+                      class="h-4 w-4 text-[#fe5d26] focus:ring-[#fe5d26]"
+                    />
+                    <span class="ml-2 text-gray-600">Private</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div id="end-datetime">
+              <label class="block text-sm text-[#0d0d0d] mb-2"
+                >End Date/Time</label
+              >
+              <input
+                type="datetime-local"
+                class="w-full h-[42px] px-3 bg-white rounded-lg border border-gray-200 focus:outline-none focus:border-[#fe5d26] focus:ring-1 focus:ring-[#fe5d26]"
+              />
+            </div>
+          </div>
+
+          <div class="border-t border-gray-200 pt-6" id="invitation-section">
+            <h3 class="text-lg text-[#0d0d0d] mb-4">Invite Participants</h3>
+
+            <div class="space-y-4">
+              <div id="user-invitation">
+                <label class="block text-sm text-[#0d0d0d] mb-2"
+                  >Add Users</label
+                >
+                <div class="flex space-x-2">
+                  <input
+                    type="text"
+                    class="flex-1 h-[42px] px-3 bg-white rounded-lg border border-gray-200 focus:outline-none focus:border-[#fe5d26] focus:ring-1 focus:ring-[#fe5d26]"
+                    placeholder="Search users"
+                  />
+                  <button
+                    type="button"
+                    class="px-4 h-[42px] bg-gray-50 text-gray-600 rounded-lg border border-gray-200 hover:bg-gray-100"
+                  >
+                    <i class="fa-solid fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div id="group-invitation">
+                <label class="block text-sm text-[#0d0d0d] mb-2"
+                  >Add Groups</label
+                >
+                <div class="flex space-x-2">
+                  <input
+                    type="text"
+                    class="flex-1 h-[42px] px-3 bg-white rounded-lg border border-gray-200 focus:outline-none focus:border-[#fe5d26] focus:ring-1 focus:ring-[#fe5d26]"
+                    placeholder="Search groups"
+                  />
+                  <button
+                    type="button"
+                    class="px-4 h-[42px] bg-gray-50 text-gray-600 rounded-lg border border-gray-200 hover:bg-gray-100"
+                  >
+                    <i class="fa-solid fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-end space-x-4 pt-6" id="form-actions">
+            <button
+              type="button"
+              class="px-6 h-10 bg-gray-50 text-gray-600 rounded-lg border border-gray-200 hover:bg-gray-100"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="px-6 h-10 bg-[#fe5d26] text-white rounded-lg hover:bg-[#fe5d26]/90 transition-colors"
+            >
+              Create Prayer
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,306 @@
+<html class="">
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      window.FontAwesomeConfig = {
+        autoReplaceSvg: "nest", // Options: 'nest', 'remove', 'replace'
+      };
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <style>
+      * {
+        font-family: "League Spartan", sans-serif;
+      }
+
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+
+    <style>
+      .highlighted-section {
+        outline: 2px solid #3f20fb;
+        background-color: rgba(63, 32, 251, 0.1);
+      }
+
+      .edit-button {
+        position: absolute;
+        z-index: 1000;
+      }
+    </style>
+  </head>
+
+  <body class="h-full text-base-content">
+    <div
+      class="min-h-screen bg-gradient-to-b from-[#e0e0e0] via-[#e0e0e0] to-[#ffdf8d] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+      id="registration-page"
+    >
+      <div
+        class="max-w-md w-full bg-white rounded-xl shadow-sm p-8"
+        id="registration-form-container"
+      >
+        <div class="flex flex-col items-center mb-8" id="registration-header">
+          <div class="w-12 h-12 mb-4 text-[#fe5d26]" id="logo">
+            <i class="fa-solid fa-pray text-4xl"></i>
+          </div>
+          <h2 class="text-2xl text-[#0d0d0d] mb-2">Create your account</h2>
+          <p class="text-gray-600 text-center">
+            Join Rhema to connect and pray together
+          </p>
+        </div>
+
+        <form class="space-y-6" id="registration-form">
+          <div class="grid grid-cols-2 gap-4" id="name-inputs">
+            <div>
+              <label for="first-name" class="block text-sm text-[#0d0d0d] mb-2"
+                >First name</label
+              >
+              <input
+                type="text"
+                id="first-name"
+                name="first-name"
+                required=""
+                class="w-full h-[42px] px-3 bg-white rounded-lg border border-gray-200 focus:outline-none focus:border-[#fe5d26] focus:ring-1 focus:ring-[#fe5d26]"
+                placeholder="First name"
+              />
+            </div>
+            <div>
+              <label for="last-name" class="block text-sm text-[#0d0d0d] mb-2"
+                >Last name</label
+              >
+              <input
+                type="text"
+                id="last-name"
+                name="last-name"
+                required=""
+                class="w-full h-[42px] px-3 bg-white rounded-lg border border-gray-200 focus:outline-none focus:border-[#fe5d26] focus:ring-1 focus:ring-[#fe5d26]"
+                placeholder="Last name"
+              />
+            </div>
+          </div>
+
+          <div id="email-input">
+            <label for="email" class="block text-sm text-[#0d0d0d] mb-2"
+              >Email address</label
+            >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required=""
+              class="w-full h-[42px] px-3 bg-white rounded-lg border border-gray-200 focus:outline-none focus:border-[#fe5d26] focus:ring-1 focus:ring-[#fe5d26]"
+              placeholder="Enter your email"
+            />
+          </div>
+
+          <div id="password-input">
+            <label for="password" class="block text-sm text-[#0d0d0d] mb-2"
+              >Password</label
+            >
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required=""
+              class="w-full h-[42px] px-3 bg-white rounded-lg border border-gray-200 focus:outline-none focus:border-[#fe5d26] focus:ring-1 focus:ring-[#fe5d26]"
+              placeholder="Create a password"
+            />
+            <p class="mt-2 text-xs text-gray-500">
+              Must be at least 8 characters long with 1 number and 1 special
+              character
+            </p>
+          </div>
+
+          <div id="confirm-password-input">
+            <label
+              for="confirm-password"
+              class="block text-sm text-[#0d0d0d] mb-2"
+              >Confirm password</label
+            >
+            <input
+              type="password"
+              id="confirm-password"
+              name="confirm-password"
+              required=""
+              class="w-full h-[42px] px-3 bg-white rounded-lg border border-gray-200 focus:outline-none focus:border-[#fe5d26] focus:ring-1 focus:ring-[#fe5d26]"
+              placeholder="Confirm your password"
+            />
+          </div>
+
+          <div class="flex items-start" id="terms-checkbox">
+            <div class="flex items-center h-5">
+              <input
+                type="checkbox"
+                id="terms"
+                name="terms"
+                required=""
+                class="h-4 w-4 border-gray-200 rounded text-[#fe5d26] focus:ring-[#fe5d26]"
+              />
+            </div>
+            <div class="ml-3">
+              <label for="terms" class="text-sm text-gray-600">
+                I agree to the
+                <button
+                  type="button"
+                  class="text-[#fe5d26] hover:text-[#fe5d26]/80"
+                >
+                  Terms of Service
+                </button>
+                and
+                <button
+                  type="button"
+                  class="text-[#fe5d26] hover:text-[#fe5d26]/80"
+                >
+                  Privacy Policy
+                </button>
+              </label>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full h-10 bg-[#fe5d26] text-white rounded-lg hover:bg-[#fe5d26]/90 transition-colors"
+          >
+            Create account
+          </button>
+        </form>
+
+        <div class="mt-6" id="social-registration">
+          <div class="relative">
+            <div class="absolute inset-0 flex items-center">
+              <div class="w-full border-t border-gray-200"></div>
+            </div>
+            <div class="relative flex justify-center text-sm">
+              <span class="px-2 bg-white text-gray-500">Or sign up with</span>
+            </div>
+          </div>
+
+          <div class="mt-6 grid grid-cols-3 gap-3">
+            <button
+              class="w-full h-10 px-4 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600"
+            >
+              <i class="fa-brands fa-google text-xl"></i>
+            </button>
+            <button
+              class="w-full h-10 px-4 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600"
+            >
+              <i class="fa-brands fa-facebook text-xl"></i>
+            </button>
+            <button
+              class="w-full h-10 px-4 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600"
+            >
+              <i class="fa-brands fa-apple text-xl"></i>
+            </button>
+          </div>
+        </div>
+
+        <p class="mt-8 text-center text-sm text-gray-600" id="signin-prompt">
+          Already have an account?
+          <span
+            class="text-[#fe5d26] hover:text-[#fe5d26]/80 ml-1 cursor-pointer"
+            >Sign in</span
+          >
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden"
+      id="terms-modal"
+    >
+      <div class="bg-white rounded-xl max-w-2xl w-full mx-4 p-6">
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="text-xl text-[#0d0d0d]">Terms of Service</h3>
+          <button class="text-gray-500 hover:text-gray-700">
+            <i class="fa-solid fa-times text-xl"></i>
+          </button>
+        </div>
+
+        <div class="max-h-[60vh] overflow-y-auto pr-4">
+          <div class="space-y-4 text-gray-600">
+            <h4 class="text-lg text-[#0d0d0d]">1. Terms and Conditions</h4>
+            <p>
+              Welcome to Rhema. By using our services, you agree to these terms.
+              Please read them carefully.
+            </p>
+
+            <h4 class="text-lg text-[#0d0d0d]">2. User Guidelines</h4>
+            <p>
+              Users must respect the privacy and beliefs of others. Any form of
+              harassment or inappropriate behavior will not be tolerated.
+            </p>
+
+            <h4 class="text-lg text-[#0d0d0d]">3. Prayer Content</h4>
+            <p>
+              All prayer content should be respectful and considerate. Users are
+              responsible for the content they share.
+            </p>
+
+            <h4 class="text-lg text-[#0d0d0d]">4. Privacy</h4>
+            <p>
+              We take your privacy seriously. Your personal information and
+              prayer content will be protected according to our Privacy Policy.
+            </p>
+
+            <h4 class="text-lg text-[#0d0d0d]">5. Account Security</h4>
+            <p>
+              Users are responsible for maintaining the security of their
+              accounts and must notify us of any unauthorized use.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+          <button
+            class="px-6 py-2 bg-[#fe5d26] text-white rounded-lg hover:bg-[#fe5d26]/90 transition-colors"
+          >
+            Accept Terms
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const termsButtons = document.querySelectorAll(
+          'button:contains("Terms of Service")'
+        );
+        const termsModal = document.getElementById("terms-modal");
+        const closeButton = termsModal.querySelector("button");
+        const acceptButton = termsModal.querySelector("button:last-child");
+
+        termsButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            termsModal.classList.remove("hidden");
+          });
+        });
+
+        closeButton.addEventListener("click", () => {
+          termsModal.classList.add("hidden");
+        });
+
+        acceptButton.addEventListener("click", () => {
+          document.getElementById("terms").checked = true;
+          termsModal.classList.add("hidden");
+        });
+
+        termsModal.addEventListener("click", (e) => {
+          if (e.target === termsModal) {
+            termsModal.classList.add("hidden");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

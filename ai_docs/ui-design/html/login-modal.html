@@ -1,0 +1,160 @@
+<html class="">
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      window.FontAwesomeConfig = {
+        autoReplaceSvg: "nest", // Options: 'nest', 'remove', 'replace'
+      };
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <style>
+      * {
+        font-family: "League Spartan", sans-serif;
+      }
+
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+
+    <style>
+      .highlighted-section {
+        outline: 2px solid #3f20fb;
+        background-color: rgba(63, 32, 251, 0.1);
+      }
+
+      .edit-button {
+        position: absolute;
+        z-index: 1000;
+      }
+    </style>
+
+    <script>
+      tailwind.config = {};
+    </script>
+  </head>
+
+  <body class="h-full text-base-content">
+    <div
+      class="min-h-screen bg-[linear-gradient(180deg,#E0E0E0_30%,#FFDF8D_100%)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+      id="login-page"
+    >
+      <div
+        class="max-w-md w-full bg-white rounded-xl shadow-sm p-8"
+        id="login-form-container"
+      >
+        <div class="flex flex-col items-center mb-8" id="login-header">
+          <div class="w-12 h-12 mb-4 text-[#fe5d26]" id="logo">
+            <i class="fa-solid fa-pray text-4xl"></i>
+          </div>
+          <h2 class="text-2xl text-[#0d0d0d] mb-2">Welcome to Rhema</h2>
+          <p class="text-gray-600 text-center">
+            Connect and pray together in a focused space
+          </p>
+        </div>
+
+        <form class="space-y-6" id="login-form">
+          <div id="email-input">
+            <label for="email" class="block text-sm text-[#0d0d0d] mb-2"
+              >Email address</label
+            >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required=""
+              class="w-full h-[42px] px-3 bg-white rounded-lg border border-gray-200 focus:outline-none focus:border-[#fe5d26] focus:ring-1 focus:ring-[#fe5d26]"
+              placeholder="Enter your email"
+            />
+          </div>
+
+          <div id="password-input">
+            <label for="password" class="block text-sm text-[#0d0d0d] mb-2"
+              >Password</label
+            >
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required=""
+              class="w-full h-[42px] px-3 bg-white rounded-lg border border-gray-200 focus:outline-none focus:border-[#fe5d26] focus:ring-1 focus:ring-[#fe5d26]"
+              placeholder="Enter your password"
+            />
+          </div>
+
+          <div class="flex items-center justify-between" id="login-options">
+            <div class="flex items-center">
+              <input
+                type="checkbox"
+                id="remember-me"
+                class="h-4 w-4 border-gray-200 rounded text-[#fe5d26] focus:ring-[#fe5d26]"
+              />
+              <label for="remember-me" class="ml-2 block text-sm text-gray-600"
+                >Remember me</label
+              >
+            </div>
+            <span
+              class="text-sm text-[#fe5d26] hover:text-[#fe5d26]/80 cursor-pointer"
+              >Forgot password?</span
+            >
+          </div>
+
+          <button
+            type="submit"
+            class="w-full h-10 bg-[#fe5d26] text-white rounded-lg hover:bg-[#fe5d26]/90 transition-colors"
+          >
+            Sign in
+          </button>
+        </form>
+
+        <div class="mt-6" id="social-login">
+          <div class="relative">
+            <div class="absolute inset-0 flex items-center">
+              <div class="w-full border-t border-gray-200"></div>
+            </div>
+            <div class="relative flex justify-center text-sm">
+              <span class="px-2 bg-white text-gray-500">Or continue with</span>
+            </div>
+          </div>
+
+          <div class="mt-6 grid grid-cols-3 gap-3">
+            <button
+              class="w-full h-10 px-4 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600"
+            >
+              <i class="fa-brands fa-google text-xl"></i>
+            </button>
+            <button
+              class="w-full h-10 px-4 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600"
+            >
+              <i class="fa-brands fa-facebook text-xl"></i>
+            </button>
+            <button
+              class="w-full h-10 px-4 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 flex items-center justify-center text-gray-600"
+            >
+              <i class="fa-brands fa-apple text-xl"></i>
+            </button>
+          </div>
+        </div>
+
+        <p class="mt-8 text-center text-sm text-gray-600" id="signup-prompt">
+          Don't have an account?
+          <span
+            class="text-[#fe5d26] hover:text-[#fe5d26]/80 ml-1 cursor-pointer"
+            >Sign up</span
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

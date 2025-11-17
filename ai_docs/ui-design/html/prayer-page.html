@@ -1,0 +1,238 @@
+<html class="">
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      window.FontAwesomeConfig = {
+        autoReplaceSvg: "nest", // Options: 'nest', 'remove', 'replace'
+      };
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <style>
+      * {
+        font-family: "League Spartan", sans-serif;
+      }
+
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+
+    <style>
+      .highlighted-section {
+        outline: 2px solid #3f20fb;
+        background-color: rgba(63, 32, 251, 0.1);
+      }
+
+      .edit-button {
+        position: absolute;
+        z-index: 1000;
+      }
+    </style>
+
+    <script>
+      tailwind.config = {};
+    </script>
+  </head>
+
+  <body class="h-full text-base-content">
+    <div
+      class="min-h-screen bg-gradient-to-b from-[#e0e0e0] from-30% to-[#ffdf8d] to-100%"
+      id="prayer-page"
+    >
+      <!-- Header -->
+      <header class="w-full bg-white border-b border-gray-200" id="header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex justify-between items-center h-16">
+            <div class="flex items-center">
+              <i class="fa-solid fa-pray text-[#fe5d26] text-2xl"></i>
+              <span class="ml-3 text-xl text-gray-800">Rhema</span>
+            </div>
+            <div class="flex items-center space-x-4">
+              <button class="p-2 rounded-full hover:bg-gray-100">
+                <i class="fa-regular fa-bell text-gray-600"></i>
+              </button>
+              <img
+                src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg"
+                class="w-8 h-8 rounded-full"
+              />
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Prayer Information -->
+        <div class="bg-white rounded-xl shadow-sm p-6 mb-8" id="prayer-info">
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <h1 class="text-2xl text-[#0d0d0d] mb-2">
+                Prayer for Wisdom and Guidance
+              </h1>
+              <div class="flex items-center space-x-4 text-gray-600">
+                <div class="flex items-center">
+                  <img
+                    src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg"
+                    class="w-6 h-6 rounded-full mr-2"
+                  />
+                  <span>Created by John Smith</span>
+                </div>
+                <div class="flex items-center">
+                  <i class="fa-regular fa-clock mr-2"></i>
+                  <span>Ends in 2 days</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center space-x-2">
+              <div
+                class="px-3 py-1 bg-[#cfe1ca] text-[#0d0d0d] rounded-full text-sm"
+              >
+                Active
+              </div>
+              <button class="p-2 hover:bg-gray-100 rounded-full">
+                <i class="fa-solid fa-ellipsis-vertical text-gray-600"></i>
+              </button>
+            </div>
+          </div>
+          <p class="text-gray-600">
+            Seeking divine wisdom and guidance for an important decision
+            regarding our ministry's next steps. Please join in prayer and share
+            any impressions you receive.
+          </p>
+        </div>
+
+        <!-- Impression Section -->
+        <div
+          class="bg-white rounded-xl shadow-sm p-6 mb-8"
+          id="impression-section"
+        >
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl text-[#0d0d0d]">Impressions</h2>
+            <span class="text-gray-600">12 impressions</span>
+          </div>
+
+          <!-- Add Impression Form -->
+          <div class="mb-8" id="add-impression">
+            <div class="flex space-x-4">
+              <img
+                src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg"
+                class="w-10 h-10 rounded-full"
+              />
+              <div class="flex-1">
+                <textarea
+                  class="w-full h-[100px] p-3 bg-[#f3f3f3] rounded-lg border border-gray-200 focus:outline-none focus:border-[#fe5d26] focus:ring-1 focus:ring-[#fe5d26] resize-none"
+                  placeholder="Share what you're hearing from God..."
+                ></textarea>
+                <div class="flex justify-end mt-2">
+                  <button
+                    class="px-4 h-10 bg-[#fe5d26] text-white rounded-lg hover:bg-[#fe5d26]/90 transition-colors"
+                  >
+                    Share Impression
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Impressions List -->
+          <div class="space-y-6" id="impressions-list">
+            <div class="flex space-x-4">
+              <img
+                src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg"
+                class="w-10 h-10 rounded-full"
+              />
+              <div class="flex-1">
+                <div class="bg-[#f3f3f3] rounded-lg p-4">
+                  <div class="flex items-center mb-2">
+                    <span class="font-medium text-[#0d0d0d] mr-2"
+                      >Sarah Johnson</span
+                    >
+                    <span class="text-sm text-gray-600">2 hours ago</span>
+                  </div>
+                  <p class="text-gray-600">
+                    I'm sensing a strong impression about taking bold steps in
+                    faith, particularly in reaching out to new communities we
+                    haven't engaged with before.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex space-x-4">
+              <img
+                src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg"
+                class="w-10 h-10 rounded-full"
+              />
+              <div class="flex-1">
+                <div class="bg-[#f3f3f3] rounded-lg p-4">
+                  <div class="flex items-center mb-2">
+                    <span class="font-medium text-[#0d0d0d] mr-2"
+                      >Michael Chen</span
+                    >
+                    <span class="text-sm text-gray-600">4 hours ago</span>
+                  </div>
+                  <p class="text-gray-600">
+                    I feel led to share Proverbs 3:5-6. There's a clear emphasis
+                    on trusting in the Lord's guidance rather than relying
+                    solely on our own understanding.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prayer Settings (for Creator) -->
+        <div class="bg-white rounded-xl shadow-sm p-6" id="prayer-settings">
+          <h2 class="text-xl text-[#0d0d0d] mb-6">Prayer Settings</h2>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <h3 class="text-sm text-[#0d0d0d] mb-2">Participants</h3>
+              <div class="flex -space-x-2">
+                <img
+                  src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg"
+                  class="w-8 h-8 rounded-full border-2 border-white"
+                />
+                <img
+                  src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg"
+                  class="w-8 h-8 rounded-full border-2 border-white"
+                />
+                <img
+                  src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg"
+                  class="w-8 h-8 rounded-full border-2 border-white"
+                />
+                <div
+                  class="w-8 h-8 rounded-full bg-gray-100 border-2 border-white flex items-center justify-center"
+                >
+                  <span class="text-sm text-gray-600">+5</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-end space-x-4">
+              <button
+                class="px-4 h-10 bg-gray-50 text-[#0d0d0d] rounded-lg border border-gray-200 hover:bg-gray-100"
+              >
+                Edit Prayer
+              </button>
+              <button
+                class="px-4 h-10 bg-[#fe5d26] text-white rounded-lg hover:bg-[#fe5d26]/90"
+              >
+                Close Prayer
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
